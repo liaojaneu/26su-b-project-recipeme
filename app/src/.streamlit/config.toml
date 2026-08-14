@@ -1,70 +1,69 @@
 # ------------------------------------------------------------
-# Streamlit configuration for this app.
-#
-# Theme and client settings below are picked up as soon as you save this
-# file — no container restart needed. Refresh the browser tab if a change
-# doesn't appear. If it still doesn't, restart: docker compose restart app
-#
-# Full list of options:
-# https://docs.streamlit.io/develop/api-reference/configuration/config.toml
-#
-# See docs/Theming.md for a guide to changing the look of your app.
+# Streamlit configuration for RecipeMe
 # ------------------------------------------------------------
 
 [client]
-# Turn off Streamlit's built-in page navigation so that nav.py can build
-# the sidebar itself, one link at a time, based on the user's role.
+# nav.py provides the role-based sidebar navigation.
 showSidebarNavigation = false
 
-# Hide the "Deploy" button and trim the top-right menu down to the useful
-# developer entries (Rerun, Settings). Use "viewer" to hide the menu
-# entirely, or "developer" to get everything back.
+# Hide the Deploy button and simplify the top-right menu.
 toolbarMode = "minimal"
 
+
 [server]
-# Re-run the app automatically when a source file is saved.
+# Automatically rerun the application when a source file changes.
 runOnSave = true
 
+
 # ------------------------------------------------------------
-# Theme — the main content area.
-# Colors are hex strings. Fonts are "sans-serif", "serif", or "monospace".
+# Main RecipeMe theme
 # ------------------------------------------------------------
+
 [theme]
 base = "light"
 
-# Accent color: buttons, sliders, focus rings, selected states.
-primaryColor = "#2C6E63"
+# Dark burnt orange used for buttons, links, sliders,
+# selected controls, and focus indicators.
+primaryColor = "#C94B1C"
 
-# Page background and the shade used for cards, code blocks, and tables.
-backgroundColor = "#FBFAF7"
-secondaryBackgroundColor = "#F1EFE9"
+# Warm cream background with a slightly darker color for
+# cards, tables, input areas, and code blocks.
+backgroundColor = "#FFF9F2"
+secondaryBackgroundColor = "#FCEBDD"
 
-# Body text and links.
-textColor = "#1F2421"
-linkColor = "#2C6E63"
+# Dark brown text complements the orange and cream palette.
+textColor = "#33251D"
+linkColor = "#A93D16"
 
-# Serif headings against sans-serif body text keeps headings distinct
-# without needing custom CSS. Code stays monospace, where it belongs.
+# Clean body text with distinctive headings.
 font = "sans-serif"
 headingFont = "serif"
 codeFont = "monospace"
 
-# Slightly squared corners read as more deliberate than the rounded default.
-baseRadius = "small"
-buttonRadius = "small"
+# Rounded elements give RecipeMe a friendly appearance.
+baseRadius = "medium"
+buttonRadius = "medium"
 
-# Give inputs a visible outline so form fields read as fields.
-borderColor = "#E0DCD2"
+# Light orange-brown outlines keep form fields visible.
+borderColor = "#E8CBB8"
 showWidgetBorder = true
 
+
 # ------------------------------------------------------------
-# Theme — the sidebar, which inherits from [theme] unless overridden.
-# A dark sidebar against the light content area is what stops this looking
-# like a stock Streamlit app.
+# RecipeMe sidebar
 # ------------------------------------------------------------
+
 [theme.sidebar]
-backgroundColor = "#232B2B"
-secondaryBackgroundColor = "#33403D"
-textColor = "#E9EDEB"
-primaryColor = "#4E9C8D"
-borderColor = "#33403D"
+
+# Deep olive green contrasts with the orange RecipeMe branding.
+backgroundColor = "#263D32"
+secondaryBackgroundColor = "#354F42"
+
+# Warm white sidebar text.
+textColor = "#FFF8EF"
+
+# Burnt-orange accent for selected links and controls.
+primaryColor = "#E66B32"
+
+# Subtle green outlines for sidebar elements.
+borderColor = "#486556"
