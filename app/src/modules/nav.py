@@ -1,13 +1,15 @@
 # Idea borrowed from:
 # https://github.com/fsmosca/sample-streamlit-authenticator
 
-# This file has functions to add links to the left sidebar
-# based on the user's role.
+# This file adds sidebar navigation links based on
+# the currently logged-in RecipeMe persona.
 
 import streamlit as st
 
 
-# ---- General ----------------------------------------------------------------
+# ---------------------------------------------------------------------------
+# General navigation
+# ---------------------------------------------------------------------------
 
 def home_nav():
     st.sidebar.page_link(
@@ -20,12 +22,14 @@ def home_nav():
 def about_page_nav():
     st.sidebar.page_link(
         "pages/30_About.py",
-        label="About",
-        icon="🧠",
+        label="About RecipeMe",
+        icon="ℹ️",
     )
 
 
-# ---- RecipeMe: Rachel --------------------------------------------------------
+# ---------------------------------------------------------------------------
+# Rachel Green: Home Cook
+# ---------------------------------------------------------------------------
 
 def rachel_home_nav():
     st.sidebar.page_link(
@@ -35,13 +39,55 @@ def rachel_home_nav():
     )
 
 
-# ---- RecipeMe: Mark ----------------------------------------------------------
+def discover_recipes_nav():
+    st.sidebar.page_link(
+        "pages/01_Discover_Recipes.py",
+        label="Discover Recipes",
+        icon="🔎",
+    )
+
+
+def my_collections_nav():
+    st.sidebar.page_link(
+        "pages/02_My_Collections.py",
+        label="My Collections",
+        icon="📚",
+    )
+
+
+def reviews_and_creators_nav():
+    st.sidebar.page_link(
+        "pages/03_Reviews_and_Creators.py",
+        label="Reviews and Creators",
+        icon="⭐",
+    )
+
+
+# ---------------------------------------------------------------------------
+# Mark Smith: Professional Chef
+# ---------------------------------------------------------------------------
 
 def mark_home_nav():
     st.sidebar.page_link(
         "pages/10_Mark_Home.py",
         label="Mark Home",
         icon="🏠",
+    )
+
+
+def manage_recipes_nav():
+    st.sidebar.page_link(
+        "pages/11_Manage_Recipes.py",
+        label="Manage Recipes",
+        icon="📝",
+    )
+
+
+def ingredients_and_tags_nav():
+    st.sidebar.page_link(
+        "pages/12_Ingredients_and_Tags.py",
+        label="Ingredients and Tags",
+        icon="🥕",
     )
 
 
@@ -53,7 +99,9 @@ def recipe_engagement_nav():
     )
 
 
-# ---- RecipeMe: Clark ---------------------------------------------------------
+# ---------------------------------------------------------------------------
+# Clark Johnson: Recipe Content Creator
+# ---------------------------------------------------------------------------
 
 def clark_home_nav():
     st.sidebar.page_link(
@@ -63,105 +111,55 @@ def clark_home_nav():
     )
 
 
-# ---- Role: pol_strat_advisor ------------------------------------------------
-
-def pol_strat_home_nav():
+def creator_content_nav():
     st.sidebar.page_link(
-        "pages/00_Pol_Strat_Home.py",
-        label="Political Strategist Home",
-        icon="👤",
+        "pages/21_Creator_Content.py",
+        label="Creator Content",
+        icon="🎥",
     )
 
 
-def world_bank_viz_nav():
+def audience_reviews_nav():
     st.sidebar.page_link(
-        "pages/01_World_Bank_Viz.py",
-        label="World Bank Visualization",
-        icon="🏦",
+        "pages/22_Audience_Reviews.py",
+        label="Audience Reviews",
+        icon="💬",
     )
 
 
-def map_demo_nav():
+def themed_collections_nav():
     st.sidebar.page_link(
-        "pages/02_Map_Demo.py",
-        label="Map Demonstration",
-        icon="🗺️",
+        "pages/23_Themed_Collections.py",
+        label="Themed Collections",
+        icon="📂",
     )
 
 
-# ---- Role: usaid_worker -----------------------------------------------------
-
-def usaid_worker_home_nav():
-    st.sidebar.page_link(
-        "pages/10_USAID_Worker_Home.py",
-        label="USAID Worker Home",
-        icon="🏠",
-    )
-
-
-def ngo_directory_nav():
-    st.sidebar.page_link(
-        "pages/14_NGO_Directory.py",
-        label="NGO Directory",
-        icon="📁",
-    )
-
-
-def add_ngo_nav():
-    st.sidebar.page_link(
-        "pages/15_Add_NGO.py",
-        label="Add New NGO",
-        icon="➕",
-    )
-
-
-def prediction_nav():
-    st.sidebar.page_link(
-        "pages/11_Prediction.py",
-        label="Regression Prediction",
-        icon="📈",
-    )
-
-
-def api_test_nav():
-    st.sidebar.page_link(
-        "pages/12_API_Test.py",
-        label="Test the API",
-        icon="🛜",
-    )
-
-
-def classification_nav():
-    st.sidebar.page_link(
-        "pages/13_Classification.py",
-        label="Classification Demo",
-        icon="🌺",
-    )
-
-
-# ---- Role: administrator ----------------------------------------------------
+# ---------------------------------------------------------------------------
+# David Lopez: System Administrator
+# ---------------------------------------------------------------------------
 
 def admin_home_nav():
     st.sidebar.page_link(
         "pages/20_Admin_Home.py",
-        label="System Admin",
+        label="Admin Home",
         icon="🖥️",
     )
 
 
-def ml_model_mgmt_nav():
-    st.sidebar.page_link(
-        "pages/21_ML_Model_Mgmt.py",
-        label="ML Model Management",
-        icon="🏢",
-    )
-
-
-# ---- Sidebar assembly -------------------------------------------------------
+# ---------------------------------------------------------------------------
+# Sidebar assembly
+# ---------------------------------------------------------------------------
 
 def SideBarLinks(show_home=False):
     """
-    Renders sidebar navigation links based on the logged-in user's role.
+    Display sidebar links based on the logged-in RecipeMe user's role.
+
+    Expected roles:
+        home_cook
+        chef
+        creator
+        administrator
     """
 
     st.sidebar.image(
@@ -172,6 +170,7 @@ def SideBarLinks(show_home=False):
     if "authenticated" not in st.session_state:
         st.session_state["authenticated"] = False
 
+    # Redirect unauthenticated users to the login page.
     if not st.session_state["authenticated"] and not show_home:
         st.switch_page("Home.py")
 
@@ -183,35 +182,37 @@ def SideBarLinks(show_home=False):
 
         if role == "home_cook":
             rachel_home_nav()
+            discover_recipes_nav()
+            my_collections_nav()
+            reviews_and_creators_nav()
 
-        if role == "chef":
+        elif role == "chef":
             mark_home_nav()
+            manage_recipes_nav()
+            ingredients_and_tags_nav()
             recipe_engagement_nav()
 
-        if role == "creator":
+        elif role == "creator":
             clark_home_nav()
+            creator_content_nav()
+            audience_reviews_nav()
+            themed_collections_nav()
 
-        if role == "pol_strat_advisor":
-            pol_strat_home_nav()
-            world_bank_viz_nav()
-            map_demo_nav()
-
-        if role == "usaid_worker":
-            usaid_worker_home_nav()
-            ngo_directory_nav()
-            add_ngo_nav()
-            prediction_nav()
-            api_test_nav()
-            classification_nav()
-
-        if role == "administrator":
+        elif role == "administrator":
             admin_home_nav()
-            ml_model_mgmt_nav()
+
+        else:
+            st.sidebar.warning(
+                "Your account does not have a recognized role."
+            )
 
     about_page_nav()
 
     if st.session_state["authenticated"]:
-        if st.sidebar.button("Logout"):
+        if st.sidebar.button(
+            "Logout",
+            use_container_width=True,
+        ):
             st.session_state.pop("role", None)
             st.session_state.pop("user_id", None)
             st.session_state.pop("first_name", None)

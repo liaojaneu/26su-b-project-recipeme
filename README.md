@@ -1,3 +1,14 @@
+# Summer B 2026 CS 3200 RecipeMe App
+
+Created by James Liao
+
+Elevator pitch:
+
+Finding a great recipe should not mean digging through long blog posts, scattered screenshots, and social-media videos that are difficult to follow. RecipeMe brings everything together in one organized platform. Home cooks can discover recipes based on their ingredients, schedule, and dietary needs, then save favorites and learn from community reviews. Professional chefs and content creators can publish consistent, easy-to-follow recipes, connect with their audiences, and measure engagement through saves, ratings, and feedback. By combining recipe discovery, content creation, organization, and community interaction, RecipeMe makes it easier to find food worth cooking—and easier for creators to share it.
+
+This entire project was worked on by only me, unfortunately one of my partners dropped the class and the other hasn't contributed at all. I hope my project is up to par with the work of other groups despite being a one man army, and I hope you like my app! 
+
+
 # Summer B 2026 CS 3200 Project Template
 
 This is a template repo for Dr. Fontenot's Summer B 2026 CS 3200 Course Project.

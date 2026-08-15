@@ -1,9 +1,17 @@
 ##################################################
-# This is the main/entry-point file for the
-# RecipeMe application
+# Main entry-point file for the RecipeMe app
 ##################################################
 
 import logging
+
+import streamlit as st
+
+from modules.nav import SideBarLinks
+
+
+# ---------------------------------------------------------------------------
+# Logging and page configuration
+# ---------------------------------------------------------------------------
 
 logging.basicConfig(
     format="%(filename)s:%(lineno)s:%(levelname)s -- %(message)s",
@@ -12,30 +20,44 @@ logging.basicConfig(
 
 logger = logging.getLogger(__name__)
 
-import streamlit as st
+st.set_page_config(
+    page_title="RecipeMe",
+    page_icon="🍽️",
+    layout="wide",
+)
 
-from modules.nav import SideBarLinks
 
+# ---------------------------------------------------------------------------
+# Reset authentication when visiting the login page
+# ---------------------------------------------------------------------------
 
-st.set_page_config(layout="wide")
-
-# Visiting Home.py logs out the current user
 st.session_state["authenticated"] = False
+st.session_state.pop("role", None)
+st.session_state.pop("user_id", None)
+st.session_state.pop("first_name", None)
 
 SideBarLinks(show_home=True)
 
 
-# ***************************************************
+# ---------------------------------------------------------------------------
 # Main page
-# ***************************************************
+# ---------------------------------------------------------------------------
 
-logger.info("Loading the Home page of the app")
+logger.info("Loading the RecipeMe Home page")
 
 st.title("RecipeMe")
-st.write("#### Hi! As which user would you like to log in?")
+st.write("#### Who would you like to log in as?")
+
+st.write(
+    "Select a RecipeMe persona to explore the features available "
+    "to that type of user."
+)
 
 
-# Rachel Green
+# ---------------------------------------------------------------------------
+# Rachel Green: Home Cook
+# ---------------------------------------------------------------------------
+
 if st.button(
     "Act as Rachel Green, a Home Cook",
     type="primary",
@@ -51,7 +73,10 @@ if st.button(
     st.switch_page("pages/00_Rachel_Home.py")
 
 
-# Mark Smith
+# ---------------------------------------------------------------------------
+# Mark Smith: Professional Chef
+# ---------------------------------------------------------------------------
+
 if st.button(
     "Act as Mark Smith, a Professional Chef",
     type="primary",
@@ -67,7 +92,10 @@ if st.button(
     st.switch_page("pages/10_Mark_Home.py")
 
 
-# Clark Johnson
+# ---------------------------------------------------------------------------
+# Clark Johnson: Recipe Content Creator
+# ---------------------------------------------------------------------------
+
 if st.button(
     "Act as Clark Johnson, a Recipe Content Creator",
     type="primary",
@@ -83,42 +111,20 @@ if st.button(
     st.switch_page("pages/20_Clark_Home.py")
 
 
-# Existing sample persona
+# ---------------------------------------------------------------------------
+# David Lopez: System Administrator
+# ---------------------------------------------------------------------------
+
 if st.button(
-    "Act as John, a Political Strategy Advisor",
-    type="primary",
-    use_container_width=True,
-):
-    st.session_state["authenticated"] = True
-    st.session_state["role"] = "pol_strat_advisor"
-    st.session_state["first_name"] = "John"
-
-    logger.info("Logging in as Political Strategy Advisor Persona")
-
-    st.switch_page("pages/00_Pol_Strat_Home.py")
-
-
-# Existing sample persona
-if st.button(
-    "Act as Mohammad, a USAID Worker",
-    type="primary",
-    use_container_width=True,
-):
-    st.session_state["authenticated"] = True
-    st.session_state["role"] = "usaid_worker"
-    st.session_state["first_name"] = "Mohammad"
-
-    st.switch_page("pages/10_USAID_Worker_Home.py")
-
-
-# Existing sample administrator
-if st.button(
-    "Act as System Administrator",
+    "Act as David Lopez, a System Administrator",
     type="primary",
     use_container_width=True,
 ):
     st.session_state["authenticated"] = True
     st.session_state["role"] = "administrator"
-    st.session_state["first_name"] = "SysAdmin"
+    st.session_state["first_name"] = "David"
+    st.session_state["user_id"] = 4
+
+    logger.info("Logging in as David Lopez")
 
     st.switch_page("pages/20_Admin_Home.py")
